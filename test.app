@@ -1,15 +1,15 @@
 #!/bin/python3
 from flask import Flask
 import json
-# from flask import request
+from flask import request
 
 app = Flask(__name__)
 
 @app.route("/webhook", methods =["POST"])
 def webhook():
     #Section for scripts after git push
-    # jsonfile = request.json    
-    # after = jsonfile['after']
+    jsonfile = request.json    
+    after = jsonfile['after']
     os.system("git pull")
     return "200 ok"
     #End section
