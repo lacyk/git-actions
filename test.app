@@ -1,17 +1,17 @@
 #!/bin/python3
-from flask import Flask
+from flask import Flask, request, abort
 import json
-from flask import request
 
 app = Flask(__name__)
 
 @app.route("/webhook", methods =["POST"])
 def webhook():
     #Section for scripts after git push
-    jsonfile = request.json    
-    after = jsonfile['after']
-    os.system("git pull")
-    return "200 ok"
+    if request.method == 'POST':    
+        print(request.json)
+        return "success", 200
+    else:
+        abort(400)
     #End section
  
 @app.route("/home")
